@@ -1,11 +1,11 @@
 import mongoose, { Schema } from 'mongoose';
 
-export interface IData {
+export type User = {
     name: string;
     age: number;
 } 
 
-const dataSchema: Schema = new Schema({
+const userSchema: Schema = new Schema({
     name: {
         required: true,
         type: String
@@ -15,6 +15,5 @@ const dataSchema: Schema = new Schema({
         type: Number
     }
 });
-const Data = mongoose.model<IData>('Data',dataSchema);
+export const UserModel = mongoose.model<User>('Data',userSchema);
 
-export {Data}

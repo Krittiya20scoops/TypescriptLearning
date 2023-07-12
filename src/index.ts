@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import mongoose from 'mongoose';
-import routes from './routes/routes';
+import routes from './routes';
 import dotenv from 'dotenv';
 dotenv.config();
 
