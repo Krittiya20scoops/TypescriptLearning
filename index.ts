@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import mongoose from 'mongoose';
-// import routes from "./src/routes/routes"
+import routes from './routes/routes';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -22,10 +22,7 @@ const app = express();
 
 app.use(express.json());
 
-// app.use('/api', routes)
-app.get('/', (req: Request, res: Response) => {
-    res.send('Express + TypeScript Server');
-  });
+app.use('/api', routes)
 
 app.listen(3000, () => {
     // tslint:disable-next-line:no-console

@@ -1,15 +1,13 @@
-const express = require('express');
-
+import express from 'express';
+import {Data} from '../models/model';
 const router = express.Router()
-const Model = require('../models/model');
-module.exports = router;
 
 //Post Method
 router.post('/post', async (req, res) => {
-    const data = new Model({
+    const data = new Data({
         name: req.body.name,
         age: req.body.age
-    })
+    });
 
     try {
         const dataToSave = await data.save();
@@ -23,7 +21,7 @@ router.post('/post', async (req, res) => {
 //Get all Method
 router.get('/getAll', async (req, res) => {
     try {
-        const data = await Model.find();
+        const data = await Data.find();
         res.json(data)
     }
     catch (error) {
@@ -34,7 +32,7 @@ router.get('/getAll', async (req, res) => {
 //Get by ID Method
 router.get('/getOne/:id', async (req, res) => {
     try{
-        const data = await Model.findById(req.params.id);
+        const data = await Data.findById(req.params.id);
         res.json(data)
     }
     catch(error){
@@ -49,7 +47,7 @@ router.patch('/update/:id', async (req, res) => {
         const updatedData = req.body;
         const options = { new: true };
 
-        const result = await Model.findByIdAndUpdate(
+        const result = await Data.findByIdAndUpdate(
             id, updatedData, options
         )
 
@@ -64,10 +62,13 @@ router.patch('/update/:id', async (req, res) => {
 router.delete('/delete/:id', async (req, res) => {
     try {
         const id = req.params.id;
-        const data = await Model.findByIdAndDelete(id)
+        const data = await Data.findByIdAndDelete(id)
         res.send(`Document with ${data.name} has been deleted..`)
     }
     catch (error) {
         res.status(400).json({ message: error.message })
     }
 })
+
+export default router;
+
