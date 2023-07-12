@@ -1,11 +1,11 @@
 import { UserModel } from "../models/model";
  
-export const create = async (data: any) => UserModel.create(data);
+export const createUser = async (data: any) => UserModel.create(data);
 
-export const getAll = async () => UserModel.find();
+export const getUsers = async () => UserModel.find();
 
-export const getOne = async (id: number) => UserModel.findById(id);
+export const getUserbyId = async (id: number) => UserModel.findById(id);
 
-export const update = async (id: number, data: any, options: any) => UserModel.findByIdAndUpdate(id, data, options);
+export const updateUserById = async (id: number, data: any, options: any) => UserModel.findByIdAndUpdate(id, data, options);
 
-export const deleteOne = async (id: number) => UserModel.findByIdAndDelete(id)
+export const deleteUser = async (id: number) => UserModel.findByIdAndDelete(id)

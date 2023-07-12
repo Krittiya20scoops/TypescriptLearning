@@ -1,15 +1,15 @@
 import express from 'express';
-import { createUser, deleteUser, getListUsers, getUserbyId, updateUser } from './controller/user.controller';
+import { create, deleteUser, list, getInfoById, updateUser } from './controller/user.controller';
 const router = express.Router()
 
 //Post Method
-router.post('/post', createUser)
+router.post('/create', create)
 
 //Get all Method
-router.get('/getAll', getListUsers)
+router.get('/getAll', list)
 
 //Get by ID Method
-router.get('/getOne/:id', getUserbyId)
+router.get('/getOne/:id', getInfoById)
 
 //Update by ID Method
 router.patch('/update/:id', updateUser)

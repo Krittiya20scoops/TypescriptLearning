@@ -1,5 +1,5 @@
 import { User } from "../models/model";
-import { create, deleteOne, getAll, getOne, update } from "../dao/user.dao";
+import * as userDao from "../dao/user.dao";
 export type CreateUserDto = {
     body: User
 };
@@ -9,9 +9,9 @@ export type UpdateUserDto = {
     body: User
 };
 
-export const createUser = async (req: CreateUserDto, res: any) => {
+export const create = async (req: CreateUserDto, res: any) => {
     try {
-        const dataToSave = await create({
+        const dataToSave = await userDao.createUser({
             name: req.body.name,
             age: req.body.age
         });
@@ -22,9 +22,9 @@ export const createUser = async (req: CreateUserDto, res: any) => {
     }
 }
 
-export const getListUsers = async (req: any, res: any) => {
+export const list = async (req: any, res: any) => {
     try {
-        const datas = await getAll();
+        const datas = await userDao.getUsers();
         res.json(datas);
     }
     catch (error) {
@@ -32,9 +32,9 @@ export const getListUsers = async (req: any, res: any) => {
     }
 }
 
-export const getUserbyId = async (req: any, res: any) => {
+export const getInfoById = async (req: any, res: any) => {
     try{
-        const data = await getOne(req.params.id)
+        const data = await userDao.getUserbyId(req.params.id)
         res.json(data)
     }
     catch(error){
@@ -46,7 +46,7 @@ export const updateUser = async (req: UpdateUserDto, res: any) => {
     try {
 
         console.log(req.params.id, req.body,);
-        const result = await update(
+        const result = await userDao.updateUserById(
             req.params.id, req.body, { new: true }
         )
 
@@ -59,7 +59,7 @@ export const updateUser = async (req: UpdateUserDto, res: any) => {
 
 export const deleteUser = async (req: any, res: any) => {
     try {
-        const data = await deleteOne(req.params.id)
+        const data = await userDao.deleteUser(req.params.id)
         res.send(`Document with ${data.name} has been deleted..`)
     }
     catch (error) {
